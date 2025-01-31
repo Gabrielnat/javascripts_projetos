@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTipos de dados JS</title>
+</head>
+<body>
+    <h1 id="Objeto"></h1>
+    <h2 id="vetor"></h2>
+    <h3 id="text"></h3>
+    <script>
+        //numero:
+        let idade = 56;
+        let peso = 87.5;
+
+        //javascript (js) tbm permite não utilizaar virgula ni final
+        let cor = "rosa chiclete"
+        let nome = "antoniovaldo"
+
+        //objeto
+        const pessoa = {nome:"antoniovaldo", sobrenome: "adiamante"}
+
+        const carros = ['fusca','volvo','bmw']
+
+        //manipular o DOM trocando o h1 pelos valores
+        document.getElementById("Objeto").innerHTML = pessoa.nome
+        document.getElementById("vetor").innerHTML = carros[0]
+        document.getElementById("text").innerText = "O rato comeu a roupa"
+    </script>
+</body>
+</html>
