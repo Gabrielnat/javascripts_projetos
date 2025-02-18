@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Detalhe do produto</h1>
+    <p id="preco">Preço : R$2800,00</p>
+    <script>
+        //codigo sera exeutado assim que pagina for
+        //Completamente atualizada
+        //verificar se o dispositivo é um iphone
+        document.addEventListener('DOMContentLoaded' , ()=>{
+            if(/iPhone/.test(navigator.userAgent)){
+                const precoElemento = document.getElementById("preco")
+                precoElemento.textContent = "tem iphone? toma R$5000,00"
+            }if(/Windows/.test(navigator.userAgent)){
+                const precoElemento = document.getElementById("preco")
+                precoElemento.textContent = "tem windows? toma R$1000,00"
+            }else if(/Android/.test(navigator.userAgent)){
+                const precoElemento = document.getElementById("preco")
+                precoElemento.textContent = "tem android? toma 1200,00"
+            }
+        })
+        console.log(navigator.userAgent)
+    </script>
+</body>
+</html>

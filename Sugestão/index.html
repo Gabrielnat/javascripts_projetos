@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #email-sugestao{
+            border: 1px solid   #ccc;
+            padding: 5px;
+        }
+
+        .sugestao-item{
+            padding: 2px 5px;
+            cursor: pointer;
+        }
+
+        .sugestao-item:houver{
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <input type="email" id="email-input" placeholder="Digite aqui">
+    <div id="email-sugestao" style="display: none"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded' , () => {
+            const entradaEmai = document.getElementById('email-input')
+            const caixasugestao = document.getElementById('email-sugestao')
+
+            const dominios = ['gmail.com' , 'yahoo.com' , 'outlook.com']
+
+        entradaEmai.addEventListener('input' , (e) => {
+                const valorEntrada = e.target.value
+                if(valorEntrada.includes('@')){
+                    const dominioInserido = valorEntrada.split('@')[1]
+                    const sugestao= dominios.filter(dominio => dominio.startsWith(dominioInserido))
+
+                    caixasugestao.innerHTML = sugestao.map(dominio =>
+                    `<div class = "sugestao-item">
+                        ${valorEntrada.split('@')[0]}@${dominio}
+                    </div>`).join('')
+                    caixasugestao.style.display = "block"
+                }else{
+                    caixasugestao.style.display = 'none'
+                }
+            })
+            caixasugestao.addEventListener('click' , (e) => {
+                if(e.target.classList.contains("sugestao-item")){
+                    entradaEmai.value = e.target.textContent
+                    caixasugestao.style.display = 'none'
+                }
+            })
+        })
+    </script>
+</body>
+</html>
