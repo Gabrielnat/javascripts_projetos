@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form >
+        <input type="text" id="cep" name="f_cep" placeholder="digite seu cep" onblur="BuscarEndereco()"> 
+        <br><br>
+        <input type="text" id="logradouro" name="f_logradouro" placeholder="digite aqui seu logradouro">
+        <br><br>
+        <input type="text" id="bairro" name="f_bairro" placeholder="coloque seu bairro">
+        <br><br>
+        <input type="text" id="city" name="f_cidade" placeholder="coloque sua city">
+        <br><br>
+        <input type="text" id="estado" name="estado" placeholder="coloque seu estado">
+        <br><br>
+        <input type="text" id="dd" name="f_dd" placeholder="dd">>
+    </form>
+
+    <script>
+
+        async function BuscarEndereco() {
+             //função assicrona que será chamada quando o campo cep perder o foco
+        let cep = document.getElementById('cep').value.replace(/\D/g,'')
+
+    //verifica se o cep contém exatos 8 digitos
+    if(cep.length !== 8){
+    alert("CEP INVALIDO!!")
+    return
+    }
+
+    try{
+    let resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+
+    if(!resposta.ok){
+        alert("ERRO AO CONSULTAR")
+        return
+    }
+
+    let endereco = await resposta.json()
+
+    document.getElementById('logradouro').value = endereco.logradouro
+    document.getElementById('bairro').value = endereco.bairro
+    document.getElementById('city').value = endereco.localidade
+    document.getElementById('estado').value = endereco.uf
+    document.getElementById('dd').value = endereco.ddd
+
+    }catch(erro){
+    alert("ERRO ao buscar")
+    }
+
+    }
+    </script>
+    
+</body>
+</html>

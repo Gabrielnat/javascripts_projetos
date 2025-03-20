@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca pokemon</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <h1>Informações do Pokémon</h1>
+    <p>Digite o nome ou ID do Pokémon:</p>
+    <div>
+        <input type="text" id="pokemon" placeholder="ex: pikachu">
+    <button onclick="obterInfoPokemon()">Buscar Informações do pokemon</button>
+    </div>
+    <div id="pokemon-info">
+
+    </div>
+    <script>
+        function obterInfoPokemon(){
+            const inputPokemon = document.getElementById('pokemon')
+            const nomeOuIdPokemon = inputPokemon.value.toLowerCase()
+ 
+            if(!nomeOuIdPokemon){
+                alert("Qual Pokemon você quer buscar ?")
+                return
+            }
+ 
+            fetch(`https://pokeapi.co/api/v2/pokemon/${nomeOuIdPokemon}`)
+            .then(resposta =>{
+                if(!resposta.ok){
+                    throw new console.error(resposta.status);
+                }
+                return resposta.json()
+            })
+            .then(pokemon =>{
+                const habilidadesHtml = pokemon.moves.map(item =>`<span class="habilidade-badge">${item.move.name}</span>`).join('')
+ 
+                const divInfoPokemon = document.getElementById('pokemon-info')
+                divInfoPokemon.innerHTML = `<img src="${pokemon.sprites.front_default}">
+                <h2>Nome: ${pokemon.name}</h2>
+                <h3>N°${pokemon.id}</h3>
+                <h3>Tipo ${pokemon.types.map(item => '' + item.type.name).toString()}</h3>
+                <h3>Peso: ${pokemon.weight /10}KG</h3>
+                <h3>Altura: ${pokemon.height /10}</h3>`
+            })
+            .catch(erro => {
+                console.error(erro)
+            })
+        }
+    </script>
+</body>
+</html>

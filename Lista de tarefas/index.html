@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+     <input type="text" id="tarefa" name="f_texto" placeholder="digite aqui">
+    <button type="submit" id="add">Enviar</button>
+
+    <ul id="lista-tarefas"></ul>
+    <script>
+        
+        const inputtarefas = document.getElementById("tarefa")
+        const botaoAdicionar = document.getElementById("add")
+        const listaTarefas = document.getElementById("lista-tarefas")
+
+        botaoAdicionar.addEventListener("click", function() {
+            const tarefa = inputtarefas.value.trim()
+
+            if(tarefa !== ""){
+                const listItem = document.createElement("li")
+                listItem.textContent = tarefa
+                listaTarefas.appendChild(listItem)
+                inputtarefas.value = ""
+            }
+        })
+
+        listaTarefas.addEventListener("click", function (event){
+            if(event.target.tagName === "LI"){
+                event.target.remove()
+            }
+        })
+    </script>
+</body>
+</html>
